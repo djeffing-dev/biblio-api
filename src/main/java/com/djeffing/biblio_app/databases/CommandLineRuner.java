@@ -7,17 +7,21 @@ import org.springframework.stereotype.Component;
 public class CommandLineRuner implements CommandLineRunner {
     final private BookCommand bookCommand;
     final private  CustomerCommand customerCommand;
+    final  private  LoanCommand loanCommand;
 
-    public CommandLineRuner(BookCommand bookCommand, CustomerCommand customerCommand) {
+    public CommandLineRuner(BookCommand bookCommand, CustomerCommand customerCommand, LoanCommand loanCommand) {
         this.bookCommand = bookCommand;
         this.customerCommand = customerCommand;
+        this.loanCommand = loanCommand;
     }
+
 
 
 
     @Override
     public void run(String... args) throws Exception {
-        //bookCommand.save();
-        //customerCommand.save();
+        loanCommand.save();
+        bookCommand.save();
+        customerCommand.save();
     }
 }

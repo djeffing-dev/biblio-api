@@ -85,7 +85,8 @@ public class CustomerServiceImp  implements CustomerService {
 
     @Override
     public String deleteAll() {
-        customerRepository.deleteAll();
+        //customerRepository.deleteAll();
+        customerRepository.truncateTableAndResetId();// Cette fonction effetue déjà automatiquement la suppresion
         return "La liste des clients à été supprimer avec succès";
     }
 }

@@ -59,16 +59,38 @@ public class LoanServiceImp implements LoanService {
 
     @Override
     public LoanDto update(long laonId, LoanDto loanDto) {
+        Optional<LoanDto> loanDtoOptional = findById(laonId);
+        if(loanDtoOptional.isPresent()){
+            LoanDto newLoanDto = loanDtoOptional.get();
+
+            if(loanDto.getDateEmprunt()!=null){
+                newLoanDto.setDateEmprunt(loanDto.getDateEmprunt());
+            }
+
+            if(loanDto.getDateRetour()!=null){
+                newLoanDto.setDateRetour(loanDto.getDateRetour());
+            }
+
+            if(loanDto.getDateRetourEstimer()!= null){
+                newLoanDto.setDateRetourEstimer(loanDto.getDateRetourEstimer());
+            }
+
+            return save(newLoanDto);
+        }
+
         return null;
     }
 
     @Override
     public String deleteById(long laonId) {
-        return null;
+        loanRepository.deleteById(laonId);
+        return "L'emprunt qui a été selectionner a été supprimer avec success";
     }
 
     @Override
     public String deleteAll() {
-        return null;
+        //loanRepository.deleteAll();
+        loanRepository.truncateTableAndResetId(); // Cette fonction effetue déjà automatiquement la suppresion
+        return "La liste des emprunts a été supprimer avec success";
     }
 }

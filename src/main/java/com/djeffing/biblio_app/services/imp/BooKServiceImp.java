@@ -84,7 +84,8 @@ public class BooKServiceImp implements BookService {
 
     @Override
     public String deleteAll() {
-        bookRepository.deleteAll();
+        //bookRepository.deleteAll();
+        bookRepository.truncateTableAndResetId(); // Cette fonction effetue déjà automatiquement la suppresion
         return "La liste des livres à été supprimer avec succès";
     }
 }
